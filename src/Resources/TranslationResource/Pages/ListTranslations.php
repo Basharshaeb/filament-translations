@@ -3,9 +3,10 @@
 namespace io3x1\FilamentTranslations\Resources\TranslationResource\Pages;
 
 use App\Models\User;
+use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
-use Filament\Pages\Actions\Action;
-use Filament\Pages\Actions\ButtonAction;
+//use Filament\Pages\Actions\Action;
+//use Filament\Pages\Actions\ButtonAction;
 use Filament\Resources\Pages\ListRecords;
 use io3x1\FilamentTranslations\Services\SaveScan;
 use io3x1\FilamentTranslations\Resources\TranslationResource;
@@ -16,7 +17,7 @@ class ListTranslations extends ListRecords
     protected static string $resource = TranslationResource::class;
 
 
-    protected function getTitle(): string
+    public function getTitle(): string
     {
         return trans('filament-translations::translation.title.list');
     }

@@ -2,22 +2,32 @@
 
 namespace io3x1\FilamentTranslations;
 
+use Filament\Navigation\MenuItem;
 use Filament\Navigation\UserMenuItem;
+use Filament\Support\Facades\FilamentAsset;
 use Illuminate\Support\ServiceProvider;
-use Filament\PluginServiceProvider;
+//use Filament\PluginServiceProvider;
 use io3x1\FilamentTranslations\Resources\TranslationResource;
 use Filament\Navigation\NavigationItem;
 use Filament\Facades\Filament;
 use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 
-class FilamentTranslationsProvider extends PluginServiceProvider
+
+class FilamentTranslationsProvider extends  PackageServiceProvider
+//    PluginServiceProvider
 {
+    public static string $name = 'filament-translations';
 
     public function configurePackage(Package $package): void
     {
-        $package->name('filament-translations');
+        $package->name(static::$name);
     }
+//    public function configurePackage(Package $package): void
+//    {
+//        $package->name('filament-translations');
+//    }
 
     protected array $resources = [
         TranslationResource::class,
@@ -53,18 +63,26 @@ class FilamentTranslationsProvider extends PluginServiceProvider
                     app()->setLocale(auth()->user()->lang);
                 }
                 if(config('filament-translations.languages-switcher-menu.position') === 'navigation'){
-                    Filament::registerNavigationItems([
+//                    Filament::registerNavigationItems([
+//                        NavigationItem::make()
+//                            ->group(config('filament-translations.languages-switcher-menu.group'))
+//                            ->icon(config('filament-translations.languages-switcher-menu.icon'))
+//                            ->label(trans('filament-translations::translation.menu'))
+//                            ->sort(config('filament-translations.languages-switcher-menu.sort'))
+//                            ->url((string)url(config('filament-translations.languages-switcher-menu.url'))),
+//                    ]);
+                    FilamentAsset::register([
                         NavigationItem::make()
                             ->group(config('filament-translations.languages-switcher-menu.group'))
                             ->icon(config('filament-translations.languages-switcher-menu.icon'))
                             ->label(trans('filament-translations::translation.menu'))
                             ->sort(config('filament-translations.languages-switcher-menu.sort'))
-                            ->url((string)url(config('filament-translations.languages-switcher-menu.url'))),
+                            ->url((string) url(config('filament-translations.languages-switcher-menu.url'))),
                     ]);
                 }
                 else if(config('filament-translations.languages-switcher-menu.position') === 'user'){
-                    Filament::registerUserMenuItems([
-                        UserMenuItem::make()
+                    FilamentAsset::register([
+                        MenuItem::make()
                             ->icon(config('filament-translations.languages-switcher-menu.icon'))
                             ->label(trans('filament-translations::translation.menu'))
                             ->sort(config('filament-translations.languages-switcher-menu.sort'))
@@ -72,9 +90,9 @@ class FilamentTranslationsProvider extends PluginServiceProvider
                     ]);
                 }
 
-                Filament::registerNavigationGroups([
-                    config('filament-translations.languages-switcher-menu.group')
-                ]);
+//                Filament::registerNavigationGroups([
+//                    config('filament-translations.languages-switcher-menu.group')
+//                ]);
             });
         }
     }

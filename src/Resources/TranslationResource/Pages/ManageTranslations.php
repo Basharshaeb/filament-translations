@@ -4,7 +4,9 @@ namespace io3x1\FilamentTranslations\Resources\TranslationResource\Pages;
 
 use App\Models\User;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
+//use Filament\Forms\Components\TextInput;
+//use Filament\Pages\Actions\ButtonAction;
+//use Filament\Pages\Actions\ButtonAction;
 use Filament\Pages\Actions\ButtonAction;
 use Filament\Resources\Pages\ManageRecords;
 use io3x1\FilamentTranslations\Services\SaveScan;
@@ -15,7 +17,7 @@ class ManageTranslations extends ManageRecords
 {
     protected static string $resource = TranslationResource::class;
 
-    protected function getTitle(): string
+    public function getTitle(): string
     {
         return trans('filament-translations::translation.title.home');
     }

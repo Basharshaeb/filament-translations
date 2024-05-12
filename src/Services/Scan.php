@@ -4,6 +4,7 @@ namespace io3x1\FilamentTranslations\Services;
 
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
 use Symfony\Component\Finder\SplFileInfo;
 
 class Scan
@@ -118,7 +119,7 @@ class Scan
         /** @var SplFileInfo $file */
         foreach ($this->disk->allFiles($this->scannedPaths->toArray()) as $file) {
             $dir = dirname($file);
-            if(\Str::startsWith($dir,$excludedPaths)) {
+            if(Str::startsWith($dir,$excludedPaths)) {
                 continue;
             }
 
